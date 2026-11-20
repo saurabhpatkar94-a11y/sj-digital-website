@@ -32,6 +32,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
 
+  <!-- Splash screen: shown once per visit (per browser tab session), like the app -->
+  <link rel="preload" as="image" href="assets/splash.jpg" media="(orientation: portrait)" />
+  <link rel="preload" as="image" href="assets/splash-landscape.jpg" media="(orientation: landscape)" />
+  <script>
+    (function () {
+      var seen = false;
+      try { seen = sessionStorage.getItem('sjSplashSeen') === '1'; } catch (e) {}
+      if (!seen) document.documentElement.classList.add('splash-on');
+    })();
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -557,9 +568,45 @@
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+    /* ============================================================
+       POWERED BY
+    ============================================================ */
+    .powered { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--line); text-align: center; }
+    .powered-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-muted); }
+    .powered-brand { display: flex; align-items: center; gap: 16px; text-align: left; }
+    .powered-brand img { width: auto; height: 72px; }
+    .powered-brand b { display: block; font-family: var(--font-head); text-transform: uppercase; letter-spacing: .06em; font-size: 1.25rem; font-weight: 600; color: var(--text); }
+    .powered-brand span { display: block; font-size: .86rem; color: var(--text-dim); }
+    .powered + .foot-bottom { margin-top: 32px; }
+
+    /* ============================================================
+       SPLASH SCREEN
+    ============================================================ */
+    .splash { display: none; }
+    html.splash-on body { overflow: hidden; }
+    html.splash-on .splash {
+      display: block; position: fixed; inset: 0; z-index: 1000; cursor: pointer; overflow: hidden;
+      background: #5a0010; transition: opacity .55s ease, visibility .55s ease;
+    }
+    html.splash-on .splash::before {
+      content: ""; position: absolute; inset: 0;
+      background: url("assets/splash.jpg") center / cover no-repeat;
+      animation: splashZoom 3.2s ease-out forwards;
+    }
+    @media (orientation: landscape) { html.splash-on .splash::before { background-image: url("assets/splash-landscape.jpg"); } }
+    .splash-bar { position: absolute; left: 50%; bottom: max(48px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: 140px; height: 3px; border-radius: 3px; background: rgba(243,210,122,.2); overflow: hidden; }
+    .splash-bar span { display: block; height: 100%; width: 0; background: var(--gold); animation: splashBar 3s linear forwards; }
+    .splash.hide { opacity: 0; visibility: hidden; }
+    @keyframes splashZoom { from { transform: scale(1.06); opacity: 0; } 25% { opacity: 1; } to { transform: scale(1); opacity: 1; } }
+    @keyframes splashBar { to { width: 100%; } }
+    @media (prefers-reduced-motion: reduce) { html.splash-on .splash::before { animation: none; } }
   </style>
 </head>
 <body>
+<div class="splash" id="splash" role="img" aria-label="SJ Digital – Professional Jewellery Calculator">
+  <div class="splash-bar" aria-hidden="true"><span></span></div>
+</div>
 <!-- Icon sprite -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -1357,6 +1404,13 @@
         </ul>
       </div>
     </div>
+    <div class="powered">
+      <span class="powered-label">Powered by</span>
+      <div class="powered-brand">
+        <img src="assets/saurabh-jewellers-logo.png" alt="Saurabh Jewellers logo" width="270" height="300" loading="lazy" />
+        <div><b>Saurabh Jewellers</b><span>Goa · Since 1999</span></div>
+      </div>
+    </div>
     <div class="foot-bottom">
       <span>© 2026 SJ Digital. All rights reserved.</span>
       <span>thesjdigital.com</span>
@@ -1369,6 +1423,22 @@
 ============================================================ -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  /* Splash screen: 3 seconds, tap to skip, once per visit */
+  (function () {
+    var root = document.documentElement, splash = document.getElementById('splash');
+    if (!splash || !root.classList.contains('splash-on')) return;
+    var done = false;
+    function close() {
+      if (done) return; done = true;
+      try { sessionStorage.setItem('sjSplashSeen', '1'); } catch (e) {}
+      splash.classList.add('hide');
+      setTimeout(function () { root.classList.remove('splash-on'); }, 600);
+    }
+    setTimeout(close, 3000);
+    splash.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') close(); }, { once: true });
+  })();
+
   /* Nav background on scroll */
   var nav = document.getElementById('nav');
   function onScroll() { if (nav) nav.classList.toggle('scrolled', window.scrollY > 10); }
