@@ -369,46 +369,93 @@
        VIDEOS
     ============================================================ */
     .videos { background: linear-gradient(180deg, var(--night), var(--maroon-deep)); }
-    .yt-grid { display: grid; gap: 20px; }
-    @media (min-width: 900px) { .yt-grid { grid-template-columns: 1fr 1fr .58fr; align-items: start; } }
-    .yt-card { border-radius: var(--r-lg); overflow: hidden; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; }
-    .yt-frame { position: relative; aspect-ratio: 16 / 9; background: #000; }
-    .yt-card.short { max-width: 340px; width: 100%; margin: 0 auto; }
-    .yt-card.short .yt-frame { aspect-ratio: 9 / 16; }
-    @media (min-width: 900px) { .yt-card.short { max-width: none; grid-row: span 1; } }
-    .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .yt-play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; cursor: pointer; background: #000; display: block; }
-    .yt-play img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: opacity .25s, transform .5s; }
-    .yt-play:hover img { opacity: 1; transform: scale(1.03); }
-    .yt-play .icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.92); display: grid; place-items: center; transition: transform .2s; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
-    .yt-play:hover .icon { transform: translate(-50%, -50%) scale(1.08); }
-    .yt-play .icon svg { width: 24px; height: 24px; fill: var(--maroon); margin-left: 3px; }
-    .yt-info { padding: 18px 20px 22px; }
-    .yt-info .kind { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-muted); }
-    .yt-info h3 { font-size: 1.08rem; margin-top: 6px; }
-    .text-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); font-weight: 600; font-size: .92rem; margin-top: 10px; }
+    .text-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); font-weight: 600; font-size: .92rem; white-space: nowrap; }
     .text-link:hover { color: var(--gold-bright); }
-    .text-link:hover .i { transform: translateX(2px); }
     .text-link .i { transition: transform .2s; }
+    .text-link:hover .i { transform: translateX(2px); }
 
-    .ig-top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin: 80px 0 24px; }
-    .ig-top h3 { font-family: var(--font-head); text-transform: uppercase; font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 600; }
-    .ig-top p { color: var(--text-dim); margin-top: 6px; }
-    .ig-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    @media (min-width: 760px) { .ig-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
-    .ig-card { position: relative; display: block; border-radius: var(--r-md); overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid var(--line); background: radial-gradient(circle at 50% 30%, var(--maroon-hi-2), var(--maroon-deep) 75%); }
-    .ig-card img { position: absolute; inset: 0; margin: auto; width: 58%; height: auto; max-height: 60%; object-fit: contain; top: -18%; filter: drop-shadow(0 10px 18px rgba(0,0,0,.45)); transition: transform .5s; }
-    .ig-card img.cover { width: 100%; height: 100%; max-height: none; top: 0; object-fit: cover; object-position: center top; filter: none; }
-    .ig-card:hover img { transform: scale(1.05); }
-    .ig-card .shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(20,3,7,.92)); }
-    .ig-card .meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; }
-    .ig-card .type { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
-    .ig-card h4 { font-size: .98rem; margin-top: 4px; color: #fff; }
-    .ig-card .go { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; color: var(--text-dim); margin-top: 6px; transition: color .2s; }
-    .ig-card:hover .go { color: var(--gold); }
-    .ig-card .play { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border-radius: 50%; background: rgba(0,0,0,.45); display: grid; place-items: center; color: #fff; }
-    .ig-card .play svg { width: 12px; height: 12px; fill: currentColor; margin-left: 2px; }
-    .social-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 48px; }
+    /* featured player + playlist */
+    .vp { display: grid; gap: 20px; }
+    @media (min-width: 980px) { .vp { grid-template-columns: 1.75fr 1fr; gap: 24px; align-items: start; } }
+    .vp-main { border-radius: var(--r-lg); overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
+    .vp-frame { position: relative; aspect-ratio: 16 / 9; background: #000; }
+    .vp-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .vp-play { position: absolute; inset: 0; border: 0; padding: 0; cursor: pointer; background: #000; width: 100%; height: 100%; }
+    .vp-play img { width: 100%; height: 100%; object-fit: cover; opacity: .9; transition: opacity .3s, transform .6s; }
+    .vp-play:hover img { opacity: 1; transform: scale(1.02); }
+    .vp-big-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.95); box-shadow: 0 0 0 10px rgba(255,255,255,.15), 0 16px 40px rgba(0,0,0,.45); transition: transform .25s; }
+    .vp-play:hover .vp-big-play { transform: translate(-50%, -50%) scale(1.07); }
+    .vp-big-play svg { width: 28px; height: 28px; fill: var(--maroon); margin-left: 4px; }
+    .vp-caption { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; padding: 22px 24px 24px; }
+    .vp-kind { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-muted); }
+    .vp-caption h3 { font-size: clamp(1.15rem, 2.6vw, 1.45rem); margin-top: 6px; }
+    .vp-caption p { color: var(--text-dim); margin-top: 6px; max-width: 46em; font-size: .96rem; }
+
+    .vp-list { border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); padding: 18px; }
+    .vp-list h4 { font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-muted); padding: 2px 6px 12px; }
+    .vp-list ul { list-style: none; display: grid; gap: 6px; }
+    .vp-item { width: 100%; display: flex; gap: 14px; align-items: center; text-align: left; cursor: pointer; color: var(--text); background: transparent; border: 1px solid transparent; border-radius: 14px; padding: 8px; transition: background .2s, border-color .2s; }
+    .vp-item:hover { background: var(--surface-2); }
+    .vp-item.active { background: linear-gradient(90deg, rgba(122,20,38,.7), rgba(91,15,29,.3)); border-color: var(--line-strong); }
+    .vp-thumb { position: relative; flex-shrink: 0; width: 132px; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #000; }
+    .vp-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .vp-mini-play { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.25); }
+    .vp-mini-play svg { width: 22px; height: 22px; fill: #fff; }
+    .vp-item.active .vp-mini-play { background: rgba(58,10,20,.55); }
+    .vp-meta small { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-muted); }
+    .vp-meta b { display: block; font-weight: 600; font-size: .95rem; line-height: 1.3; margin-top: 2px; }
+    .vp-channel { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 14px; border-radius: 14px; border: 1px dashed var(--line-strong); transition: border-color .2s, background .2s; }
+    .vp-channel:hover { border-color: var(--gold); background: var(--surface-2); }
+    .vp-channel-ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: #ff0033; color: #fff; flex-shrink: 0; }
+    .vp-channel-ico svg { width: 20px; height: 20px; }
+    .vp-channel b { display: block; font-size: .95rem; }
+    .vp-channel small { display: block; font-size: .82rem; color: var(--text-dim); }
+    .vp-channel > .i { margin-left: auto; color: var(--gold); }
+
+    /* reels strip */
+    .reels-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 80px 0 24px; }
+    .reels-head h3 { font-family: var(--font-head); text-transform: uppercase; font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 600; }
+    .reels-head p { color: var(--text-dim); margin-top: 6px; }
+    .car-btns { display: none; gap: 8px; }
+    @media (min-width: 760px) { .car-btns { display: flex; } }
+    .car-btns button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); cursor: pointer; display: grid; place-items: center; transition: border-color .2s, color .2s; }
+    .car-btns button:hover { border-color: var(--gold); color: var(--gold); }
+    .reels { display: grid; grid-auto-flow: column; grid-auto-columns: 58%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 2px 8px; }
+    .reels::-webkit-scrollbar { display: none; }
+    @media (min-width: 560px) { .reels { grid-auto-columns: 34%; } }
+    @media (min-width: 900px) { .reels { grid-auto-columns: calc((100% - 56px) / 5); gap: 14px; } }
+    .reel {
+      scroll-snap-align: start; position: relative; aspect-ratio: 9 / 16; border-radius: 22px; overflow: hidden;
+      display: flex; flex-direction: column; padding: 16px; isolation: isolate;
+      border: 1px solid var(--line); transition: transform .3s, border-color .3s;
+    }
+    .reel::before { content: ""; position: absolute; inset: 0; z-index: -1; transition: transform .6s; }
+    .reel::after { content: ""; position: absolute; right: -30%; top: 18%; width: 90%; aspect-ratio: 1; border-radius: 50%; border: 1px solid rgba(243,210,122,.18); box-shadow: 0 0 0 26px rgba(243,210,122,.04); z-index: -1; }
+    .reel.tone-0::before { background: radial-gradient(120% 80% at 20% 0%, var(--maroon-hi-2), var(--maroon-deep) 70%); }
+    .reel.tone-1::before { background: radial-gradient(120% 80% at 80% 0%, #8a1a2e, #2e0810 70%); }
+    .reel.tone-2::before { background: linear-gradient(160deg, #4a0d19, #1f050b); }
+    .reel.tone-3::before { background: radial-gradient(120% 80% at 50% 100%, var(--maroon-hi), var(--maroon-deep) 70%); }
+    .reel:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+    .reel:hover::before { transform: scale(1.06); }
+    .reel-top { display: flex; align-items: center; justify-content: space-between; }
+    .reel-kind { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--line-strong); padding: 3px 9px; border-radius: 999px; background: rgba(0,0,0,.2); }
+    .reel-play { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.14); }
+    .reel-play svg { width: 12px; height: 12px; fill: #fff; margin-left: 2px; }
+    .reel-icon { margin-top: auto; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: rgba(243,210,122,.14); color: var(--gold); font-size: 1.45rem; }
+    .reel-title { margin-top: 14px; font-family: var(--font-head); text-transform: uppercase; font-weight: 600; font-size: clamp(1.25rem, 2.2vw, 1.5rem); line-height: 1.08; color: var(--text); }
+    .reel-foot { display: flex; align-items: center; gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: .78rem; color: var(--text-dim); }
+    .reel-foot img { width: 12px; height: auto; }
+
+    /* channel bar */
+    .channel-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; margin-top: 40px; padding: 20px 22px; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); }
+    .channel-id { display: flex; align-items: center; gap: 14px; }
+    .channel-id img { width: 52px; height: 52px; border-radius: 14px; }
+    .channel-id b { display: block; font-size: 1.02rem; }
+    .channel-id span { display: block; font-size: .88rem; color: var(--text-dim); }
+    .channel-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+    .channel-btns .bi { display: inline-grid; width: 18px; height: 18px; }
+    .channel-btns .bi svg { width: 18px; height: 18px; }
+    @media (max-width: 559px) { .channel-btns, .channel-btns .btn { width: 100%; } }
 
     /* ============================================================
        STORY
@@ -1098,115 +1145,63 @@
 ============================================================ -->
 <section class="videos pad" id="videos" aria-labelledby="videos-title">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head center reveal">
       <span class="kicker">Videos</span>
       <h2 id="videos-title">Watch how jewellers use SJ Digital</h2>
       <p>Short guides and real shop examples from our YouTube and Instagram.</p>
     </div>
 
-    <div class="yt-grid">
-      <article class="yt-card reveal">
-        <div class="yt-frame" data-yt="2yUw1FqlMYU" data-title="Sarafa rate vs online rate">
-          <button class="yt-play" type="button" aria-label="Play video: Sarafa rate vs online rate">
-            <img src="https://i.ytimg.com/vi/2yUw1FqlMYU/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" />
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    <div class="vp reveal" id="vp">
+      <div class="vp-main">
+        <div class="vp-frame" id="vp-frame">
+          <button class="vp-play" type="button" id="vp-play" aria-label="Play video: Sarafa rate vs online rate">
+            <img id="vp-poster" src="https://i.ytimg.com/vi/2yUw1FqlMYU/hqdefault.jpg" alt="" width="480" height="360" />
+            <span class="vp-big-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </button>
         </div>
-        <div class="yt-info">
-          <div class="kind">YouTube</div>
-          <h3>Sarafa rate vs online rate</h3>
-          <a class="text-link" href="https://www.youtube.com/watch?v=2yUw1FqlMYU" target="_blank" rel="noopener">Watch on YouTube <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <div class="vp-caption">
+          <div>
+            <span class="vp-kind" id="vp-kind">Video</span>
+            <h3 id="vp-title">Sarafa rate vs online rate</h3>
+            <p id="vp-desc">Why the shop rate is different from the online rate, and how to explain it to customers.</p>
+          </div>
+          <a class="text-link" id="vp-link" href="https://www.youtube.com/watch?v=2yUw1FqlMYU" target="_blank" rel="noopener">Open on YouTube <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
-      </article>
-
-      <article class="yt-card reveal">
-        <div class="yt-frame" data-yt="Zh8IT24tmdY" data-title="Diamond grading guide">
-          <button class="yt-play" type="button" aria-label="Play video: Diamond grading guide">
-            <img src="https://i.ytimg.com/vi/Zh8IT24tmdY/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" />
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          </button>
-        </div>
-        <div class="yt-info">
-          <div class="kind">YouTube</div>
-          <h3>Diamond grading guide</h3>
-          <a class="text-link" href="https://www.youtube.com/watch?v=Zh8IT24tmdY" target="_blank" rel="noopener">Watch on YouTube <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
-      </article>
-
-      <article class="yt-card short reveal">
-        <div class="yt-frame" data-yt="H05Z6Y0s5R8" data-title="SJ Digital short">
-          <button class="yt-play" type="button" aria-label="Play YouTube Short">
-            <img src="https://i.ytimg.com/vi/H05Z6Y0s5R8/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" />
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          </button>
-        </div>
-        <div class="yt-info">
-          <div class="kind">YouTube Short</div>
-          <h3>Quick tip</h3>
-          <a class="text-link" href="https://www.youtube.com/shorts/H05Z6Y0s5R8" target="_blank" rel="noopener">Watch on YouTube <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
-      </article>
-    </div>
-
-    <div class="ig-top">
-      <div>
-        <h3>On Instagram</h3>
-        <p>Reels and posts from @sjdigitalindia</p>
       </div>
-      <a class="text-link" href="https://www.instagram.com/sjdigitalindia/" target="_blank" rel="noopener">View profile <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-    </div>
-    <div class="ig-grid">
-      <a class="ig-card reveal" href="https://www.instagram.com/reel/DfaSAAAEUmi/" target="_blank" rel="noopener">
-        <img src="assets/icons/gold-rate.png" alt="" loading="lazy" width="200" height="203" />
-        <span class="shade"></span><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="meta"><span class="type">Reel</span><h4>Sarafa vs online rate</h4><span class="go">Watch on Instagram <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/p/DfYsqu7Epri/" target="_blank" rel="noopener">
-        <img src="assets/icons/gold-exchange.png" alt="" loading="lazy" width="200" height="188" />
-        <span class="shade"></span>
-        <span class="meta"><span class="type">Carousel</span><h4>Dhanteras special</h4><span class="go">View on Instagram <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/reel/De9U3LNlMLw/" target="_blank" rel="noopener">
-        <img class="cover" src="assets/screens/diamond-calculator.jpg" alt="" loading="lazy" width="540" height="1108" />
-        <span class="shade"></span><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="meta"><span class="type">Reel</span><h4>Diamond grading guide</h4><span class="go">Watch on Instagram <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/reel/DeuWU81h-Z7/" target="_blank" rel="noopener">
-        <img class="cover" src="assets/founder-saurabh.jpg" alt="" loading="lazy" width="405" height="900" />
-        <span class="shade"></span><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="meta"><span class="type">Reel</span><h4>Founder story</h4><span class="go">Watch on Instagram <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/reel/Dew9wmuhexS/" target="_blank" rel="noopener">
-        <img src="assets/sj-monogram.png" alt="" loading="lazy" width="193" height="294" style="width:34%" />
-        <span class="shade"></span><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="meta"><span class="type">Reel</span><h4>24 Indian languages</h4><span class="go">Watch on Instagram <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/reel/De0v2VJhkEi/" target="_blank" rel="noopener">
-        <img src="assets/icons/karigar.png" alt="" loading="lazy" width="200" height="151" />
-        <span class="shade"></span><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="meta"><span class="type">Reel</span><h4>Karigar calculator</h4><span class="go">Watch on Instagram <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/p/De9XAxJCHfw/" target="_blank" rel="noopener">
-        <img class="cover" src="assets/splash.jpg" alt="" loading="lazy" width="563" height="1000" />
-        <span class="shade"></span>
-        <span class="meta"><span class="type">Carousel</span><h4>All features</h4><span class="go">View on Instagram <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/sjdigitalindia/" target="_blank" rel="noopener">
-        <img src="assets/icons/purity-fix.png" alt="" loading="lazy" width="200" height="120" />
-        <span class="shade"></span>
-        <span class="meta"><span class="type">Profile</span><h4>More on @sjdigitalindia</h4><span class="go">Open Instagram <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-      </a>
+      <aside class="vp-list" aria-label="More videos">
+        <h4>Up next</h4>
+        <ul><li><button class="vp-item active" type="button" data-vid="2yUw1FqlMYU" data-title="Sarafa rate vs online rate" data-desc="Why the shop rate is different from the online rate, and how to explain it to customers." data-kind="Video" data-url="https://www.youtube.com/watch?v=2yUw1FqlMYU" aria-pressed="true"><span class="vp-thumb"><img src="https://i.ytimg.com/vi/2yUw1FqlMYU/mqdefault.jpg" alt="" width="320" height="180" loading="lazy" /><span class="vp-mini-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="vp-meta"><small>Video</small><b>Sarafa rate vs online rate</b></span></button></li><li><button class="vp-item" type="button" data-vid="Zh8IT24tmdY" data-title="Diamond grading guide" data-desc="A simple guide to grading diamonds that you can share with customers." data-kind="Video" data-url="https://www.youtube.com/watch?v=Zh8IT24tmdY" aria-pressed="false"><span class="vp-thumb"><img src="https://i.ytimg.com/vi/Zh8IT24tmdY/mqdefault.jpg" alt="" width="320" height="180" loading="lazy" /><span class="vp-mini-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="vp-meta"><small>Video</small><b>Diamond grading guide</b></span></button></li><li><button class="vp-item" type="button" data-vid="H05Z6Y0s5R8" data-title="Sarafa vs online rate in 60 seconds" data-desc="The quick version, made for sharing on WhatsApp and Instagram." data-kind="Short" data-url="https://www.youtube.com/shorts/H05Z6Y0s5R8" aria-pressed="false"><span class="vp-thumb"><img src="https://i.ytimg.com/vi/H05Z6Y0s5R8/mqdefault.jpg" alt="" width="320" height="180" loading="lazy" /><span class="vp-mini-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="vp-meta"><small>Short</small><b>Sarafa vs online rate in 60 seconds</b></span></button></li></ul>
+        <a class="vp-channel" href="https://www.youtube.com/channel/UCqa9RBY2n3VKi9FDEdBWlUg?sub_confirmation=1" target="_blank" rel="noopener">
+          <span class="vp-channel-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></span>
+          <span><b>SJ Digital on YouTube</b><small>Subscribe for new guides</small></span>
+          <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </aside>
     </div>
 
-    <div class="social-cta">
-      <a class="btn btn-gold" href="https://www.instagram.com/sjdigitalindia/" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.2.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>
-        Follow us on Instagram
-      </a>
-      <a class="btn btn-ghost" href="https://www.youtube.com/channel/UCqa9RBY2n3VKi9FDEdBWlUg?sub_confirmation=1" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
-        Subscribe on YouTube
-      </a>
+    <div class="reels-head">
+      <div>
+        <h3>Reels on Instagram</h3>
+        <p>Tips, guides and shop stories from @sjdigitalindia.</p>
+      </div>
+      <div class="car-btns">
+        <button type="button" data-reels="-1" aria-label="Previous reels"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg></button>
+        <button type="button" data-reels="1" aria-label="Next reels"><svg class="i" aria-hidden="true"><use href="#i-right"/></svg></button>
+      </div>
+    </div>
+    <div class="reels" id="reels" tabindex="0" aria-label="Instagram reels, scroll sideways">
+      <a class="reel tone-0" href="https://www.instagram.com/reel/DfaSAAAEUmi/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-rate"/></svg></span><span class="reel-title">Sarafa vs online rate</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-1" href="https://www.instagram.com/p/DfYsqu7Epri/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Carousel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg></span><span class="reel-title">Dhanteras special</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-2" href="https://www.instagram.com/reel/De9U3LNlMLw/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-diamond"/></svg></span><span class="reel-title">Diamond grading guide</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-3" href="https://www.instagram.com/reel/DeuWU81h-Z7/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-store"/></svg></span><span class="reel-title">Founder story</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-0" href="https://www.instagram.com/reel/Dew9wmuhexS/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-lang"/></svg></span><span class="reel-title">24 Indian languages</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-1" href="https://www.instagram.com/reel/De0v2VJhkEi/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-tool"/></svg></span><span class="reel-title">Karigar calculator</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-2" href="https://www.instagram.com/p/De9XAxJCHfw/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Carousel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-palette"/></svg></span><span class="reel-title">All features</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a>
+    </div>
+
+    <div class="channel-bar reveal">
+      <div class="channel-id">
+        <img src="assets/sj-app-icon-512.png" alt="" width="52" height="52" loading="lazy" />
+        <div><b>Follow SJ Digital</b><span>New tips for jewellers on Instagram and YouTube</span></div>
+      </div>
+      <div class="channel-btns">
+        <a class="btn btn-gold" href="https://www.instagram.com/sjdigitalindia/" target="_blank" rel="noopener"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.2.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></span>Follow on Instagram</a>
+        <a class="btn btn-ghost" href="https://www.youtube.com/channel/UCqa9RBY2n3VKi9FDEdBWlUg?sub_confirmation=1" target="_blank" rel="noopener"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></span>Subscribe on YouTube</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1431,19 +1426,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })();
 
-  /* YouTube: load the player only when tapped */
-  document.querySelectorAll('.yt-frame').forEach(function (frame) {
-    var btn = frame.querySelector('.yt-play');
-    if (!btn) return;
-    btn.addEventListener('click', function () {
-      var id = frame.getAttribute('data-yt');
-      var iframe = document.createElement('iframe');
-      iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-      iframe.title = frame.getAttribute('data-title') || 'SJ Digital video';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      iframe.allowFullscreen = true;
-      frame.innerHTML = ''; frame.appendChild(iframe);
+  /* Videos: featured player + playlist */
+  (function () {
+    var frame = document.getElementById('vp-frame'); if (!frame) return;
+    var items = document.querySelectorAll('.vp-item');
+    var cur = items[0];
+    function embed(id, title) {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title = title || 'SJ Digital video';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen = true;
+      frame.innerHTML = ''; frame.appendChild(f);
+    }
+    function select(btn) {
+      cur = btn;
+      items.forEach(function (b) { var a = b === btn; b.classList.toggle('active', a); b.setAttribute('aria-pressed', a ? 'true' : 'false'); });
+      document.getElementById('vp-title').textContent = btn.dataset.title;
+      document.getElementById('vp-desc').textContent = btn.dataset.desc;
+      document.getElementById('vp-kind').textContent = btn.dataset.kind;
+      document.getElementById('vp-link').href = btn.dataset.url;
+    }
+    var play = document.getElementById('vp-play');
+    if (play) play.addEventListener('click', function () { embed(cur.dataset.vid, cur.dataset.title); });
+    items.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        select(btn); embed(btn.dataset.vid, btn.dataset.title);
+        if (window.innerWidth < 980) frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
     });
+  })();
+
+  /* Reels strip arrows */
+  var reels = document.getElementById('reels');
+  document.querySelectorAll('[data-reels]').forEach(function (b) {
+    b.addEventListener('click', function () { if (reels) reels.scrollBy({ left: reels.clientWidth * 0.8 * Number(b.getAttribute('data-reels')), behavior: 'smooth' }); });
   });
 
   /* Reveal on scroll + active nav link */
