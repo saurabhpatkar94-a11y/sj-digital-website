@@ -33,8 +33,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Splash screen: shown once per visit (per browser tab session), like the app -->
-  <link rel="preload" as="image" href="assets/splash.jpg" media="(orientation: portrait)" />
-  <link rel="preload" as="image" href="assets/splash-landscape.jpg" media="(orientation: landscape)" />
+  <link rel="preload" as="image" href="assets/splash-logo.png" />
   <script>
     (function () {
       var seen = false;
@@ -587,18 +586,17 @@
     html.splash-on body { overflow: hidden; }
     html.splash-on .splash {
       display: block; position: fixed; inset: 0; z-index: 1000; cursor: pointer; overflow: hidden;
-      background: #5a0010; transition: opacity .55s ease, visibility .55s ease;
+      background: #6b0115; transition: opacity .55s ease, visibility .55s ease;
     }
     html.splash-on .splash::before {
       content: ""; position: absolute; inset: 0;
-      background: url("assets/splash.jpg") center / cover no-repeat;
+      background: url("assets/splash-logo.png") center 46% / min(72vw, 400px) auto no-repeat;
       animation: splashZoom 3.2s ease-out forwards;
     }
-    @media (orientation: landscape) { html.splash-on .splash::before { background-image: url("assets/splash-landscape.jpg"); } }
     .splash-bar { position: absolute; left: 50%; bottom: max(48px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: 140px; height: 3px; border-radius: 3px; background: rgba(243,210,122,.2); overflow: hidden; }
     .splash-bar span { display: block; height: 100%; width: 0; background: var(--gold); animation: splashBar 3s linear forwards; }
     .splash.hide { opacity: 0; visibility: hidden; }
-    @keyframes splashZoom { from { transform: scale(1.06); opacity: 0; } 25% { opacity: 1; } to { transform: scale(1); opacity: 1; } }
+    @keyframes splashZoom { from { transform: scale(.94); opacity: 0; } 30% { opacity: 1; } to { transform: scale(1); opacity: 1; } }
     @keyframes splashBar { to { width: 100%; } }
     @media (prefers-reduced-motion: reduce) { html.splash-on .splash::before { animation: none; } }
   </style>
@@ -1346,13 +1344,11 @@
         <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></span>
         <span><b>Contact us</b><small>sjprocalculator@gmail.com</small></span>
       </a>
-      <!-- Privacy Policy — replace # with your privacy policy URL -->
-      <a href="#">
+            <a href="privacy.html">
         <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
         <span><b>Privacy Policy</b><small>How we handle data</small></span>
       </a>
-      <!-- Terms & Conditions — replace # with your T&C URL -->
-      <a href="#">
+            <a href="terms.html">
         <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg></span>
         <span><b>Terms</b><small>Terms &amp; conditions</small></span>
       </a>
@@ -1399,8 +1395,8 @@
         <ul>
           <li><a href="mailto:sjprocalculator@gmail.com">sjprocalculator@gmail.com</a></li>
           <li><a href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener">Play Store page</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
         </ul>
       </div>
     </div>

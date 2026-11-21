@@ -1,0 +1,32 @@
+/* Shared styles for the Privacy Policy and Terms pages */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --night: #24060d; --maroon: #5b0f1d; --gold: #f3d27a; --gold-muted: #d9b45a;
+  --cream: #fbf6ea; --ink: #2b0811; --ink-dim: #6b4a45; --line: rgba(91,15,29,.14);
+}
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { color: var(--maroon); font-weight: 600; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--maroon); outline-offset: 3px; border-radius: 6px; }
+.lg-wrap { width: 100%; max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+.lg-nav { position: sticky; top: 0; z-index: 10; background: var(--night); border-bottom: 1px solid rgba(243,210,122,.2); }
+.lg-nav-row { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 1180px; }
+.lg-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.lg-brand img { width: 22px; height: auto; }
+.lg-brand span { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .06em; font-size: 1.15rem; color: var(--gold); }
+.lg-back { color: #f6ecdb; font-weight: 500; font-size: .92rem; text-decoration: none; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(243,210,122,.3); }
+.lg-back:hover { border-color: var(--gold); color: var(--gold); }
+
+.lg-doc { padding-top: 56px; padding-bottom: 72px; }
+.lg-kicker { font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #a87a10; }
+.lg-doc h1 { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: clamp(2.2rem, 7vw, 3.2rem); line-height: 1.05; color: var(--maroon); margin-top: 8px; }
+.lg-meta { color: var(--ink-dim); font-size: .92rem; margin: 10px 0 28px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.lg-doc h2 { font-size: 1.15rem; font-weight: 700; color: var(--maroon); margin-top: 34px; }
+.lg-doc p, .lg-doc li { color: #3d2420; margin-top: 10px; }
+.lg-doc ul { padding-left: 22px; margin-top: 6px; }
+.lg-doc li { margin-top: 6px; }
+
+.lg-foot { background: var(--night); color: rgba(246,236,219,.72); padding: 28px 0; font-size: .9rem; text-align: center; }
+.lg-foot a { color: var(--gold); font-weight: 500; }
+.lg-foot p { margin-top: 8px; }
