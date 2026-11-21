@@ -99,6 +99,7 @@
       --r-sm: 12px; --r-md: 18px; --r-lg: 28px;
       --wrap: 1180px;
       --bar-h: 68px;
+      --tk-h: 36px;
     }
 
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -122,7 +123,7 @@
     h3, h4 { font-family: var(--font-body); font-weight: 650; letter-spacing: -.01em; line-height: 1.25; }
     .gold-text { background: linear-gradient(100deg, var(--gold-bright), var(--gold) 40%, var(--gold-muted)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-    section { position: relative; scroll-margin-top: var(--bar-h); }
+    section { position: relative; scroll-margin-top: calc(var(--bar-h) + var(--tk-h)); }
     .pad { padding: 88px 0; }
     @media (min-width: 900px) { .pad { padding: 128px 0; } }
 
@@ -172,7 +173,7 @@
        NAV
     ============================================================ */
     .nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--bar-h);
+      position: fixed; inset: var(--tk-h) 0 auto 0; z-index: 100; height: var(--bar-h);
       transition: background .3s, border-color .3s, backdrop-filter .3s;
       border-bottom: 1px solid transparent;
     }
@@ -192,7 +193,7 @@
     /* ============================================================
        HERO
     ============================================================ */
-    .hero { padding: calc(var(--bar-h) + 40px) 0 72px; overflow: hidden; isolation: isolate; }
+    .hero { padding: calc(var(--bar-h) + var(--tk-h) + 40px) 0 72px; overflow: hidden; isolation: isolate; }
     .hero::before {
       content: ""; position: absolute; inset: 0; z-index: -2;
       background:
@@ -206,7 +207,7 @@
       background-size: 56px 56px;
       -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, #000, transparent 75%); mask-image: radial-gradient(70% 60% at 50% 30%, #000, transparent 75%);
     }
-    @media (min-width: 960px) { .hero { padding: calc(var(--bar-h) + 72px) 0 112px; } }
+    @media (min-width: 960px) { .hero { padding: calc(var(--bar-h) + var(--tk-h) + 72px) 0 112px; } }
     .hero-grid { display: grid; gap: 56px; align-items: center; }
     .hero-grid > * { min-width: 0; }
     @media (max-width: 559px) { .hero-cta .btn, .dl-actions .btn { width: 100%; } .btn-lg { padding: 14px 20px; } }
@@ -759,6 +760,83 @@
     }
 
     /* ============================================================
+       TICKER (top scrolling strip)
+    ============================================================ */
+    .ticker {
+      position: fixed; inset: 0 0 auto 0; z-index: 101; height: var(--tk-h); overflow: hidden;
+      background: linear-gradient(90deg, var(--gold-muted), var(--gold) 30%, var(--gold-bright) 50%, var(--gold) 70%, var(--gold-muted));
+      color: var(--ink); border-bottom: 1px solid rgba(58,10,20,.25);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    }
+    .tk-track { display: flex; width: max-content; height: 100%; animation: tickerMove 38s linear infinite; }
+    .ticker:hover .tk-track, .ticker:focus-within .tk-track { animation-play-state: paused; }
+    .tk-run { display: flex; align-items: center; flex-shrink: 0; }
+    .tk-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 22px; font-size: .84rem; font-weight: 600; white-space: nowrap; position: relative; }
+    .tk-item::after { content: "✦"; position: absolute; right: -6px; font-size: .7rem; color: var(--maroon); opacity: .7; }
+    .tk-item b { font-weight: 800; color: var(--maroon); }
+    .tk-item .i { color: var(--maroon); }
+    .tk-link { color: var(--maroon); text-decoration: underline; text-underline-offset: 3px; }
+    .tk-link:hover { color: var(--ink); }
+    @keyframes tickerMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .tk-track { animation: none; } .ticker { overflow-x: auto; } }
+
+    /* ============================================================
+       CONTACT: side tab + drawer
+    ============================================================ */
+    .side-tab {
+      position: fixed; right: 0; top: 50%; z-index: 90; transform: translateY(-50%);
+      writing-mode: vertical-rl; display: flex; align-items: center; gap: 8px;
+      padding: 18px 10px; border: 0; border-radius: 14px 0 0 14px; cursor: pointer;
+      background: linear-gradient(180deg, var(--gold-bright), var(--gold-muted)); color: var(--ink);
+      font-weight: 700; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      box-shadow: -8px 10px 24px -8px rgba(0,0,0,.55); transition: padding .2s, background .2s;
+    }
+    .side-tab .i { transform: rotate(90deg); }
+    .side-tab:hover { padding-right: 14px; background: var(--gold-bright); }
+    @media (max-width: 559px) { .side-tab { padding: 14px 8px; font-size: .78rem; top: auto; bottom: 22%; transform: none; } }
+
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 140; background: rgba(15,2,5,.6); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s; }
+    .drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 150; width: min(460px, 100%);
+      overflow-y: auto; overscroll-behavior: contain; padding: 26px 24px 32px;
+      background: var(--cream); color: var(--ink); box-shadow: -30px 0 60px -20px rgba(0,0,0,.6);
+      transform: translateX(105%); visibility: hidden; transition: transform .38s cubic-bezier(.2,.8,.2,1), visibility .38s;
+    }
+    body.drawer-open { overflow: hidden; }
+    body.drawer-open .drawer { transform: none; visibility: visible; }
+    body.drawer-open .drawer-backdrop { opacity: 1; visibility: visible; }
+    body.drawer-open .side-tab { opacity: 0; pointer-events: none; }
+    .drawer-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .drawer .kicker { color: var(--gold-dark); }
+    .drawer h2 { font-size: 2.2rem; color: var(--maroon); margin-top: 8px; }
+    .drawer-close { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; border: 1px solid var(--cream-4); background: #fff; color: var(--maroon); cursor: pointer; display: grid; place-items: center; font-size: 1.1rem; }
+    .drawer-close:hover { border-color: var(--maroon); }
+    .drawer-intro { margin-top: 10px; color: var(--ink-dim); }
+
+    .contact-form { display: grid; gap: 14px; margin-top: 22px; }
+    .field-row { display: grid; gap: 14px; }
+    @media (min-width: 420px) { .field-row { grid-template-columns: 1fr 1fr; } }
+    .field { display: grid; gap: 6px; }
+    .field span { font-size: .85rem; font-weight: 600; color: var(--maroon); }
+    .field em { color: var(--red); font-style: normal; }
+    .field input, .field select, .field textarea {
+      width: 100%; font: inherit; font-size: 1rem; color: var(--ink); background: #fff;
+      border: 1.5px solid var(--cream-4); border-radius: 12px; padding: 11px 14px; min-height: 48px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field textarea { resize: vertical; min-height: 100px; }
+    .field input::placeholder, .field textarea::placeholder { color: #a8928a; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--maroon); box-shadow: 0 0 0 4px rgba(91,15,29,.12); }
+    .field .invalid, .field input.invalid, .field textarea.invalid { border-color: var(--red); }
+    .contact-form .btn { width: 100%; }
+    .form-error { color: var(--red); font-weight: 600; font-size: .92rem; }
+    .form-note { font-size: .82rem; color: var(--ink-dim); text-align: center; }
+    .form-note.sent { color: var(--green); font-weight: 600; }
+    .drawer-alt { display: grid; gap: 10px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--cream-4); }
+    .drawer-alt a { display: inline-flex; align-items: center; gap: 10px; color: var(--maroon); font-weight: 600; font-size: .95rem; overflow-wrap: anywhere; }
+
+    /* ============================================================
        POWERED BY
     ============================================================ */
     .powered { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--line); text-align: center; }
@@ -831,6 +909,9 @@
 <!-- ============================================================
      NAV
 ============================================================ -->
+<div class="ticker" role="region" aria-label="Highlights">
+  <div class="tk-track"><div class="tk-run"><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-coin"/></svg><b>₹300</b> lifetime access</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>No subscription</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-rate"/></svg>16 gold &amp; silver calculators</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-palette"/></svg>Gold rate card with 40 themes</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-lang"/></svg>24 Indian languages</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-store"/></svg>Made in Goa since 1999</span><a class="tk-item tk-link" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener">Download now on Google Play →</a></div><div class="tk-run" aria-hidden="true"><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-coin"/></svg><b>₹300</b> lifetime access</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>No subscription</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-rate"/></svg>16 gold &amp; silver calculators</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-palette"/></svg>Gold rate card with 40 themes</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-lang"/></svg>24 Indian languages</span><span class="tk-item"><svg class="i" aria-hidden="true"><use href="#i-store"/></svg>Made in Goa since 1999</span><a class="tk-item tk-link" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener" tabindex="-1">Download now on Google Play →</a></div></div>
+</div>
 <header class="nav" id="nav">
   <div class="wrap nav-row">
     <a class="brand" href="#top" aria-label="SJ Digital – back to top">
@@ -843,6 +924,7 @@
         <li><a href="#videos">Videos</a></li>
         <li><a href="#story">Our story</a></li>
         <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
     <a class="gp-badge gp-nav" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" /></a>
@@ -1141,6 +1223,65 @@
 </main>
 
 <!-- ============================================================
+     CONTACT: side tab + slide-out drawer
+============================================================ -->
+<button class="side-tab" id="side-tab" type="button" aria-controls="contact" aria-expanded="false">
+  <svg class="i" aria-hidden="true"><use href="#i-mail"/></svg><span>Reach us</span>
+</button>
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="drawer" id="contact" role="dialog" aria-modal="true" aria-labelledby="contact-title" aria-hidden="true">
+  <div class="drawer-head">
+    <div>
+      <span class="kicker">Contact</span>
+      <h2 id="contact-title">Reach us</h2>
+    </div>
+    <button class="drawer-close" id="drawer-close" type="button" aria-label="Close contact form"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <p class="drawer-intro">Questions about the app, your purchase, or a feature you'd like? Send us a message and we'll get back to you.</p>
+
+  <form class="contact-form" id="contact-form" novalidate>
+    <label class="field">
+      <span>Your name <em>*</em></span>
+      <input type="text" name="name" autocomplete="name" required placeholder="e.g. Ramesh Patil" />
+    </label>
+    <div class="field-row">
+      <label class="field">
+        <span>Phone / WhatsApp</span>
+        <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+91 98xxx xxxxx" />
+      </label>
+      <label class="field">
+        <span>Shop &amp; city</span>
+        <input type="text" name="shop" autocomplete="organization" placeholder="Patil Jewellers, Pune" />
+      </label>
+    </div>
+    <label class="field">
+      <span>Topic</span>
+      <select name="topic">
+        <option>Question about the app</option>
+        <option>Purchase or payment</option>
+        <option>Feature request</option>
+        <option>Something else</option>
+      </select>
+    </label>
+    <label class="field">
+      <span>Message <em>*</em></span>
+      <textarea name="message" rows="4" required placeholder="How can we help?"></textarea>
+    </label>
+    <p class="form-error" id="form-error" role="alert" hidden></p>
+    <button class="btn btn-primary btn-lg" type="submit">
+      <svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Send message
+    </button>
+    <p class="form-note" id="form-note">Pressing send opens your email app with your message ready to go to sjprocalculator@gmail.com.</p>
+  </form>
+
+  <div class="drawer-alt">
+    <a href="mailto:sjprocalculator@gmail.com"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>sjprocalculator@gmail.com</a>
+    <a href="https://www.instagram.com/sjdigitalindia/" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>DM us on Instagram</a>
+  </div>
+</aside>
+
+
+<!-- ============================================================
      7. FOOTER
 ============================================================ -->
 <footer>
@@ -1174,6 +1315,7 @@
       <div class="foot-col">
         <h4>Support</h4>
         <ul>
+          <li><a href="#contact">Contact form</a></li>
           <li><a href="mailto:sjprocalculator@gmail.com">sjprocalculator@gmail.com</a></li>
           <li><a href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener">Play Store page</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
@@ -1291,6 +1433,64 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[data-reels]').forEach(function (b) {
     b.addEventListener('click', function () { if (reels) reels.scrollBy({ left: reels.clientWidth * 0.8 * Number(b.getAttribute('data-reels')), behavior: 'smooth' }); });
   });
+
+  /* Contact drawer (side tab) */
+  (function () {
+    var drawer = document.getElementById('contact'), tab = document.getElementById('side-tab');
+    var backdrop = document.getElementById('drawer-backdrop'), closeBtn = document.getElementById('drawer-close');
+    if (!drawer || !tab) return;
+    var lastFocus = null;
+    function open(e) {
+      if (e) e.preventDefault();
+      lastFocus = document.activeElement;
+      document.body.classList.add('drawer-open');
+      drawer.setAttribute('aria-hidden', 'false'); tab.setAttribute('aria-expanded', 'true');
+      setTimeout(function () { var first = drawer.querySelector('input'); if (first) first.focus({ preventScroll: true }); }, 350);
+    }
+    function close() {
+      document.body.classList.remove('drawer-open');
+      drawer.setAttribute('aria-hidden', 'true'); tab.setAttribute('aria-expanded', 'false');
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }
+    tab.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) {
+      if (!document.body.classList.contains('drawer-open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'Tab') { /* keep focus inside the drawer */
+        var f = drawer.querySelectorAll('button, a[href], input, select, textarea'); var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    document.querySelectorAll('a[href="#contact"]').forEach(function (a) { a.addEventListener('click', open); });
+    if (location.hash === '#contact') open();
+  })();
+
+  /* Contact form: compose an email to SJ Digital */
+  (function () {
+    var form = document.getElementById('contact-form'); if (!form) return;
+    var err = document.getElementById('form-error'), note = document.getElementById('form-note');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = form.elements, missing = [];
+      ['name', 'message'].forEach(function (k) {
+        var bad = !f[k].value.trim(); f[k].classList.toggle('invalid', bad); if (bad) missing.push(k);
+      });
+      if (missing.length) { err.textContent = 'Please fill in your name and message.'; err.hidden = false; f[missing[0]].focus(); return; }
+      err.hidden = true;
+      var subject = 'SJ Digital website: ' + f.topic.value + ' (' + f.name.value.trim() + ')';
+      var body = 'Name: ' + f.name.value.trim() +
+        '\nPhone / WhatsApp: ' + (f.phone.value.trim() || '-') +
+        '\nShop & city: ' + (f.shop.value.trim() || '-') +
+        '\nTopic: ' + f.topic.value +
+        '\n\n' + f.message.value.trim() + '\n';
+      window.location.href = 'mailto:sjprocalculator@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      note.textContent = 'Your email app should open now with the message ready. If it doesn\'t, email us at sjprocalculator@gmail.com.';
+      note.classList.add('sent');
+    });
+  })();
 
   /* Reveal on scroll + active nav link */
   if ('IntersectionObserver' in window) {
