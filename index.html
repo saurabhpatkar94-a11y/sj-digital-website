@@ -604,6 +604,21 @@
     .btn-maroon { background: var(--maroon); color: #fff; min-height: 46px; padding: 11px 20px; font-size: .95rem; }
     .btn-maroon:hover { background: var(--maroon-hi-2); color: var(--gold); }
 
+    /* compact story layout */
+    .home-grid { display: grid; gap: 18px; align-items: center; }
+    @media (min-width: 560px) { .home-grid { grid-template-columns: 1fr 190px; } }
+    .home-grid .polaroid { margin: 8px auto 0; max-width: 200px; }
+    .home-grid .ledger { margin-top: 6px; font-size: 1.12rem; padding: 12px 12px 18px 38px; }
+    .home-grid .ledger::before { left: 28px; }
+    .home-grid .ledger .row, .home-grid .ledger b { line-height: 24px; }
+    .home-grid .ledger { background: repeating-linear-gradient(#fff, #fff 23px, #c9d7ee 24px); }
+    @media (min-width: 560px) { .stop:nth-child(3) .home-grid { grid-template-columns: 1fr 210px; } }
+    .paper-maroon .signature b { color: #fff; }
+    .paper-maroon .signature span { color: rgba(255,255,255,.7); }
+    .paper-maroon .sign-row { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(243,210,122,.25); }
+    .story.pad { padding-top: 96px; padding-bottom: 96px; }
+    @media (min-width: 900px) { .stop { margin-bottom: -60px; } .stop:last-child { margin-bottom: 0; } }
+
     /* reveal: cards slide in from their side */
     .stop.reveal { transform: translateY(24px); }
     @media (min-width: 900px) {
@@ -697,6 +712,53 @@
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
 
     /* ============================================================
+       SHORTER LAYOUT
+    ============================================================ */
+    .pad { padding: 64px 0; }
+    @media (min-width: 900px) { .pad { padding: 96px 0; } }
+    .sec-head { margin-bottom: 36px; }
+    .reels-head { margin: 56px 0 20px; }
+    .reels-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .btn-sm { min-height: 42px; padding: 9px 18px; font-size: .9rem; }
+    @media (max-width: 559px) { .reels-head { flex-direction: column; align-items: flex-start; } }
+    .story.pad { padding-top: 80px; padding-bottom: 80px; }
+    @media (max-width: 559px) { .story .ledger { display: none; } .story .chips { display: none; } }
+    @media (min-width: 900px) { .stop { margin-bottom: -40px; } }
+    @media (min-width: 900px) {
+      .trail .stop:last-child { width: 100%; margin: 80px 0 0; padding: 0; }
+      .trail .stop:last-child .node { left: 50%; right: auto; top: -48px; margin-left: -16px; }
+      .trail .stop:last-child .home-grid { grid-template-columns: 1.3fr 300px; gap: 40px; }
+      .trail .stop:last-child .paper { padding: 40px 44px 48px; }
+      .trail .stop:last-child.reveal { transform: translateY(24px); }
+      .trail .stop:last-child.reveal.in { transform: none; }
+      .trail::before { bottom: 40%; }
+    }
+
+    .price-wrap { position: relative; display: grid; gap: 20px; max-width: 980px; margin: 0 auto; align-items: center; }
+    @media (min-width: 900px) { .price-wrap { grid-template-columns: 1.05fr .95fr; gap: 32px; } }
+    .price-wrap .price-card { margin: 0; max-width: none; }
+    .get-app { border-radius: 28px; padding: 28px; background: linear-gradient(140deg, var(--maroon), var(--maroon-hi-2)); border: 1px solid var(--line-strong); text-align: center; }
+    .get-qr { display: none; }
+    @media (min-width: 900px) {
+      .get-app { padding: 40px; }
+      .get-qr { display: inline-block; background: #fff; border-radius: 20px; padding: 14px 14px 10px; box-shadow: 0 24px 50px -24px rgba(0,0,0,.7); }
+      .get-qr img { width: 160px; height: 160px; }
+      .get-qr figcaption { color: var(--ink); font-weight: 600; font-size: .88rem; margin-top: 6px; }
+    }
+    .get-app h3 { font-family: var(--font-head); text-transform: uppercase; font-weight: 600; font-size: 1.6rem; margin-top: 18px; }
+    @media (max-width: 899px) { .get-app h3 { margin-top: 0; } }
+    .get-app p { color: var(--text-dim); margin-top: 8px; }
+    .get-meta { list-style: none; display: grid; gap: 8px; margin-top: 18px; font-size: .9rem; color: var(--text-dim); }
+    .get-meta a { color: var(--gold); font-weight: 600; }
+    @media (max-width: 899px) { .get-app { display: none; } }
+    @media (max-width: 819px) {
+      .foot-grid .foot-col:nth-child(2), .foot-grid .foot-col:nth-child(3) { display: none; }
+      .foot-grid { grid-template-columns: 1fr; gap: 28px; }
+      footer { padding-top: 48px; }
+      .powered { margin-top: 36px; padding-top: 28px; }
+    }
+
+    /* ============================================================
        POWERED BY
     ============================================================ */
     .powered { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--line); text-align: center; }
@@ -778,7 +840,6 @@
     <nav aria-label="Sections">
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
-        <li><a href="#calculators">Calculators</a></li>
         <li><a href="#videos">Videos</a></li>
         <li><a href="#story">Our story</a></li>
         <li><a href="#pricing">Pricing</a></li>
@@ -873,447 +934,6 @@
 </section>
 
 <!-- ============================================================
-     2b. ALL CALCULATORS IN DETAIL (original module content)
-============================================================ -->
-<section class="light pad" id="calculators" aria-labelledby="calc-title">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="kicker">Calculators</span>
-      <h2 id="calc-title">Every calculator, in detail</h2>
-      <p>Pick a category to see exactly what each calculator does.</p>
-    </div>
-  <div class="inner-tab-wrap" id="innerTabNav">
-    <button class="inner-tab-btn active" type="button" data-panel="it-goldrate"><svg class="i" aria-hidden="true"><use href="#i-rate"/></svg> Gold Rate</button>
-    <button class="inner-tab-btn" type="button" data-panel="it-ornament"><svg class="i" aria-hidden="true"><use href="#i-ring"/></svg> Ornament Price</button>
-    <button class="inner-tab-btn" type="button" data-panel="it-purity"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg> Purity</button>
-    <button class="inner-tab-btn" type="button" data-panel="it-gemstone"><svg class="i" aria-hidden="true"><use href="#i-gem"/></svg> Gemstone</button>
-    <button class="inner-tab-btn" type="button" data-panel="it-diamond"><svg class="i" aria-hidden="true"><use href="#i-diamond"/></svg> Diamond</button>
-    <button class="inner-tab-btn" type="button" data-panel="it-karigar"><svg class="i" aria-hidden="true"><use href="#i-tool"/></svg> Karigar</button>
-    <button class="inner-tab-btn" type="button" data-panel="it-metalmix"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg> Metal Mix</button>
-    <button class="inner-tab-btn" type="button" data-panel="it-goldloan"><svg class="i" aria-hidden="true"><use href="#i-bank"/></svg> Gold Loan</button>
-  </div>
-
-  <!-- TAB: GOLD RATE -->
-  <div id="it-goldrate" class="inner-tab-panel active">
-    <div class="panel-header">
-      <div class="panel-icon"><svg class="i" aria-hidden="true"><use href="#i-rate"/></svg></div>
-      <div>
-        <h2>Gold Rate <span>Converter</span></h2>
-        <p>Enter the 24K gold rate once and instantly get rates for every purity used in jewellery and bullion trade.</p>
-      </div>
-    </div>
-    <div class="module-grid single">
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-rate"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Module · Gold Rate</div>
-            <h3>Gold Rate Converter</h3>
-          </div>
-        </div>
-        <p class="mod-desc">Enter the 24K gold rate and automatically convert it into multiple purity rates including 999, 995, 916 (22K), 750 (18K), 585 (14K), and 375 (9K). Ideal for daily shop rate display and karigar settlements.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features cols">
-          <li>Automatic purity rate conversion</li>
-          <li>Supports 999, 995, 916, 750, 585, 375</li>
-          <li>Supports 9K 37.5% and 9K 38%</li>
-          <li>Optional premium / discount adjustment</li>
-          <li>Rounding support</li>
-          <li>Daily jewellery shop calculations</li>
-          <li>Helpful for bullion dealers</li>
-          <li>Karigar settlement support</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mod-cta">
-      <div class="mod-cta-text">
-        <h4>Start Using <span>SJ Digital</span> Today</h4>
-        <p>Download the app and get instant gold rate conversions for your shop.</p>
-      </div>
-      <a class="gp-badge gp-sm" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" /></a>
-    </div>
-  </div>
-
-  <!-- TAB: ORNAMENT PRICE CALCULATOR -->
-  <div id="it-ornament" class="inner-tab-panel">
-    <div class="panel-header">
-      <div class="panel-icon"><svg class="i" aria-hidden="true"><use href="#i-ring"/></svg></div>
-      <div>
-        <h2>Ornament Price <span>Calculator</span></h2>
-        <p>Two dedicated calculators for gold ornament pricing and diamond / gemstone ornament valuation.</p>
-      </div>
-    </div>
-    <div class="module-grid">
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-ring"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 1</div>
-            <h3>Gold Ornament Calculator</h3>
-          </div>
-        </div>
-        <p class="mod-desc">Helps jewellers calculate ornament value quickly using gross weight, stone deduction, purity selection, wastage and making charges for customer-ready billing.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Gross weight entry</li>
-          <li>Stone weight deduction</li>
-          <li>Net gold weight calculation</li>
-          <li>Purity dropdown selection</li>
-          <li>Wastage percentage support</li>
-          <li>Making charges entry</li>
-          <li>Final ornament price calculation</li>
-        </ul>
-      </div>
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-diamond"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 2</div>
-            <h3>Diamond / Gemstone Ornament Calculator</h3>
-          </div>
-        </div>
-        <p class="mod-desc">Supports diamond and gemstone jewellery calculations where stone weights can be entered in multiple formats and automatically deducted before pricing.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Stone weight entry in grams</li>
-          <li>Stone weight entry in carats</li>
-          <li>Stone weight entry using ratio</li>
-          <li>Automatic gram conversion</li>
-          <li>Automatic deduction from gold weight</li>
-          <li>Accurate remaining gold calculation</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mod-cta">
-      <div class="mod-cta-text">
-        <h4>Price Ornaments <span>Accurately</span></h4>
-        <p>Used by retail jewellers, manufacturers and gold loan counters.</p>
-      </div>
-      <a class="gp-badge gp-sm" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" /></a>
-    </div>
-  </div>
-
-  <!-- TAB: PURITY -->
-  <div id="it-purity" class="inner-tab-panel">
-    <div class="panel-header">
-      <div class="panel-icon"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg></div>
-      <div>
-        <h2>Purity <span>Tools</span></h2>
-        <p>Two precision tools for purity conversion and professional bullion calculations.</p>
-      </div>
-    </div>
-    <div class="module-grid">
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 1</div>
-            <h3>Purity Calculator</h3>
-          </div>
-        </div>
-        <p class="mod-desc">Converts gold purity between Karat and percentage instantly for quick verification and calculations at the counter or workshop.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Karat to percentage conversion</li>
-          <li>Percentage to Karat conversion</li>
-          <li>Supports all jewellery standard purities</li>
-          <li>Useful for counter and workshop calculations</li>
-        </ul>
-      </div>
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-scale"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 2</div>
-            <h3>Bullion Converter <small style="font-size:0.7rem;font-weight:400;color:var(--text-muted)">(999 → 995 g)</small></h3>
-          </div>
-        </div>
-        <p class="mod-desc">Professional bullion conversion tool for converting 999 purity gold weight into 995 purity equivalent — designed for bullion traders and manufacturers.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Gram-based bullion conversion</li>
-          <li>Instant purity adjustment</li>
-          <li>Useful for bullion issue calculations</li>
-          <li>Supports workshop and manufacturing usage</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mod-cta">
-      <div class="mod-cta-text">
-        <h4>Precise <span>Purity Calculations</span></h4>
-        <p>Trusted by bullion traders and jewellery manufacturers.</p>
-      </div>
-      <a class="gp-badge gp-sm" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" /></a>
-    </div>
-  </div>
-
-  <!-- TAB: GEMSTONE -->
-  <div id="it-gemstone" class="inner-tab-panel">
-    <div class="panel-header">
-      <div class="panel-icon"><svg class="i" aria-hidden="true"><use href="#i-gem"/></svg></div>
-      <div>
-        <h2>Gemstone <span>Calculator</span></h2>
-        <p>Batch gemstone calculations and unit conversion tools built for modern jewellery workflows.</p>
-      </div>
-    </div>
-    <div class="module-grid">
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-gem"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 1</div>
-            <h3>Gemstone Calculator</h3>
-          </div>
-        </div>
-        <p class="mod-desc">Calculate gemstone weights accurately with batch-style entry support for manufacturing workflows.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Multiple gemstone entries</li>
-          <li>Batch calculation support</li>
-          <li>Accurate total gemstone weight output</li>
-          <li>Useful for manufacturing workflows</li>
-        </ul>
-      </div>
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-swap"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 2</div>
-            <h3>Unit Converter <small style="font-size:0.7rem;font-weight:400;color:var(--text-muted)">(Carat · Gram · Ratti)</small></h3>
-          </div>
-        </div>
-        <p class="mod-desc">Converts gemstone weight units instantly between carat, gram and ratti — supporting both traditional and modern jewellery calculations.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Carat to gram conversion</li>
-          <li>Gram to carat conversion</li>
-          <li>Gram to ratti conversion</li>
-          <li>Ratti to gram conversion</li>
-          <li>Traditional and modern workflow support</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mod-cta">
-      <div class="mod-cta-text">
-        <h4>Gemstone Calculations <span>Made Simple</span></h4>
-        <p>Accurate unit conversions for every jewellery professional.</p>
-      </div>
-      <a class="gp-badge gp-sm" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" /></a>
-    </div>
-  </div>
-
-  <!-- TAB: DIAMOND CALCULATOR -->
-  <div id="it-diamond" class="inner-tab-panel">
-    <div class="panel-header">
-      <div class="panel-icon"><svg class="i" aria-hidden="true"><use href="#i-diamond"/></svg></div>
-      <div>
-        <h2>Diamond <span>Calculator</span></h2>
-        <p>Three specialised tools for estimating diamond weight, calculating multi-stone batches, and planning jewellery designs.</p>
-      </div>
-    </div>
-    <div class="module-grid triple">
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-diamond"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 1</div>
-            <h3>Diamond Weight Calculator</h3>
-          </div>
-        </div>
-        <p class="mod-desc">Calculates estimated diamond weight using diameter and height measurements — useful for loose stone estimation and valuation.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Diameter input</li>
-          <li>Height input</li>
-          <li>Estimated diamond weight output</li>
-          <li>Useful for loose stone estimation</li>
-        </ul>
-      </div>
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-diamond"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 2</div>
-            <h3>Multi-Stone Calculator</h3>
-          </div>
-        </div>
-        <p class="mod-desc">Calculate total weight for multiple diamonds together — ideal during jewellery repair, stone setting and batch work.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Multiple stone entries supported</li>
-          <li>Batch weight calculation</li>
-          <li>Instant combined weight output</li>
-          <li>Useful during repair and stone setting</li>
-        </ul>
-      </div>
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-ruler"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 3</div>
-            <h3>Diamond Size Estimator</h3>
-          </div>
-        </div>
-        <p class="mod-desc">Estimates diamond size based on weight — supporting jewellery designers and helping staff assist customers in selection.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Reverse size estimation from weight</li>
-          <li>Helps jewellery designers</li>
-          <li>Supports sales assistance</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mod-cta">
-      <div class="mod-cta-text">
-        <h4>Professional <span>Diamond Tools</span></h4>
-        <p>Built for jewellery designers, stone setters and retail counters.</p>
-      </div>
-      <a class="gp-badge gp-sm" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" /></a>
-    </div>
-  </div>
-
-  <!-- TAB: KARIGAR -->
-  <div id="it-karigar" class="inner-tab-panel">
-    <div class="panel-header">
-      <div class="panel-icon"><svg class="i" aria-hidden="true"><use href="#i-tool"/></svg></div>
-      <div>
-        <h2>Karigar &amp; Wholesale <span>Calculators</span></h2>
-        <p>Track gold issued to karigars and manage wholesale batch settlements with full accuracy.</p>
-      </div>
-    </div>
-    <div class="module-grid">
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-tool"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 1</div>
-            <h3>Karigar Gold Issue Calculator <span class="mod-pro">PRO</span></h3>
-          </div>
-        </div>
-        <p class="mod-desc">Tracks gold issued to karigars using batch-wise calculation with purity selection and balance tracking. Detects short or excess returns automatically.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Batch 1 entry</li>
-          <li>Batch 2 entry</li>
-          <li>Batch 3 entry</li>
-          <li>Purity selection per batch</li>
-          <li>Net gold issued calculation</li>
-          <li>Balance tracking support</li>
-          <li>Report generation support</li>
-        </ul>
-      </div>
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-store"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Submodule 2</div>
-            <h3>Wholesale Order Calculator <span class="mod-pro">PRO</span></h3>
-          </div>
-        </div>
-        <p class="mod-desc">Designed for wholesalers to calculate batch-based gold settlements with both gold and rupee settlement options using 995 rate.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features">
-          <li>Multi-batch entry support</li>
-          <li>Purity-wise calculation</li>
-          <li>Gold settlement option</li>
-          <li>Rupee settlement option</li>
-          <li>Auto calculation using 995 rate</li>
-          <li>Final balance output</li>
-          <li>Report generation support</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mod-cta">
-      <div class="mod-cta-text">
-        <h4>Karigar &amp; Wholesale <span>Tracking</span></h4>
-        <p>Reduce gold tracking errors and settle accounts faster.</p>
-      </div>
-      <a class="gp-badge gp-sm" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" /></a>
-    </div>
-  </div>
-
-  <!-- TAB: METAL MIX -->
-  <div id="it-metalmix" class="inner-tab-panel">
-    <div class="panel-header">
-      <div class="panel-icon"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg></div>
-      <div>
-        <h2>Metal Mix <span>Calculator</span></h2>
-        <p>Plan alloy mixtures with precision and calculate exact quantities needed to hit your target karat.</p>
-      </div>
-    </div>
-    <div class="module-grid single">
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Module · Metal Mix</div>
-            <h3>Metal Proportion Calculator <span class="mod-pro">PRO</span></h3>
-          </div>
-        </div>
-        <p class="mod-desc">Calculates metal mixing ratios required to achieve target purity during jewellery manufacturing. Eliminates guesswork in alloy preparation and supports batch adjustments with report generation.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features cols">
-          <li>Existing purity input</li>
-          <li>Additional metal purity input</li>
-          <li>Target purity calculation</li>
-          <li>Mixing ratio output</li>
-          <li>Batch adjustment support</li>
-          <li>Report generation support</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mod-cta">
-      <div class="mod-cta-text">
-        <h4>Perfect <span>Alloy Planning</span></h4>
-        <p>Used by manufacturers and workshop owners for precise metal mixing.</p>
-      </div>
-      <a class="gp-badge gp-sm" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" /></a>
-    </div>
-  </div>
-
-  <!-- TAB: GOLD LOAN CALCULATOR -->
-  <div id="it-goldloan" class="inner-tab-panel">
-    <div class="panel-header">
-      <div class="panel-icon"><svg class="i" aria-hidden="true"><use href="#i-bank"/></svg></div>
-      <div>
-        <h2>Gold Loan <span>Calculator</span></h2>
-        <p>Professional gold valuation for loan eligibility — with purity adjustment, stone deduction and instant report generation.</p>
-      </div>
-    </div>
-    <div class="module-grid single">
-      <div class="mod-card">
-        <div class="mod-card-head">
-          <div class="mod-icon"><svg class="i" aria-hidden="true"><use href="#i-bank"/></svg></div>
-          <div class="mod-meta">
-            <div class="mod-label">Module · Gold Loan</div>
-            <h3>Gold Loan Calculator <span class="mod-pro">PRO</span></h3>
-          </div>
-        </div>
-        <p class="mod-desc">Professional valuation calculator that estimates gold value and loan eligibility after purity adjustment and stone deduction. Generates customer-ready reports in PDF and JPG instantly.</p>
-        <div class="mod-divider"></div>
-        <ul class="mod-features cols">
-          <li>Stone weight deduction</li>
-          <li>Net gold weight calculation</li>
-          <li>Purity-based valuation</li>
-          <li>Loan eligibility estimation</li>
-          <li>Real-time gold value calculation</li>
-          <li>Report generation support</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mod-cta">
-      <div class="mod-cta-text">
-        <h4>Accurate <span>Gold Loan Valuation</span></h4>
-        <p>Trusted by gold loan counters and pawnbrokers across India.</p>
-      </div>
-      <a class="gp-badge gp-sm" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" /></a>
-    </div>
-  </div>
-
-  </div>
-</section>
-
-<!-- ============================================================
      3. VIDEOS
 ============================================================ -->
 <section class="videos pad" id="videos" aria-labelledby="videos-title">
@@ -1357,24 +977,16 @@
         <h3>Reels on Instagram</h3>
         <p>Tips, guides and shop stories from @sjdigitalindia.</p>
       </div>
-      <div class="car-btns">
+      <div class="reels-actions">
+        <a class="btn btn-gold btn-sm" href="https://www.instagram.com/sjdigitalindia/" target="_blank" rel="noopener">Follow on Instagram</a>
+        <div class="car-btns">
         <button type="button" data-reels="-1" aria-label="Previous reels"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg></button>
         <button type="button" data-reels="1" aria-label="Next reels"><svg class="i" aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
       </div>
     </div>
     <div class="reels" id="reels" tabindex="0" aria-label="Instagram reels, scroll sideways">
       <a class="reel tone-0" href="https://www.instagram.com/reel/DfaSAAAEUmi/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-rate"/></svg></span><span class="reel-title">Sarafa vs online rate</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-1" href="https://www.instagram.com/p/DfYsqu7Epri/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Carousel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg></span><span class="reel-title">Dhanteras special</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-2" href="https://www.instagram.com/reel/De9U3LNlMLw/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-diamond"/></svg></span><span class="reel-title">Diamond grading guide</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-3" href="https://www.instagram.com/reel/DeuWU81h-Z7/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-store"/></svg></span><span class="reel-title">Founder story</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-0" href="https://www.instagram.com/reel/Dew9wmuhexS/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-lang"/></svg></span><span class="reel-title">24 Indian languages</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-1" href="https://www.instagram.com/reel/De0v2VJhkEi/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Reel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-tool"/></svg></span><span class="reel-title">Karigar calculator</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a><a class="reel tone-2" href="https://www.instagram.com/p/De9XAxJCHfw/" target="_blank" rel="noopener"><span class="reel-top"><span class="reel-kind">Carousel</span><span class="reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span><span class="reel-icon"><svg class="i" aria-hidden="true"><use href="#i-palette"/></svg></span><span class="reel-title">All features</span><span class="reel-foot"><img src="assets/sj-monogram.png" alt="" width="14" height="21" loading="lazy" />@sjdigitalindia</span></a>
-    </div>
-
-    <div class="channel-bar reveal">
-      <div class="channel-id">
-        <img src="assets/sj-app-icon-512.png" alt="" width="52" height="52" loading="lazy" />
-        <div><b>Follow SJ Digital</b><span>New tips for jewellers on Instagram and YouTube</span></div>
-      </div>
-      <div class="channel-btns">
-        <a class="btn btn-gold" href="https://www.instagram.com/sjdigitalindia/" target="_blank" rel="noopener"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.2.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></span>Follow on Instagram</a>
-        <a class="btn btn-ghost" href="https://www.youtube.com/channel/UCqa9RBY2n3VKi9FDEdBWlUg?sub_confirmation=1" target="_blank" rel="noopener"><span class="bi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></span>Subscribe on YouTube</a>
-      </div>
     </div>
   </div>
 </section>
@@ -1391,9 +1003,9 @@
     </div>
 
     <ol class="trail">
-      <!-- Intro -->
-      <li class="stop stop-intro reveal">
-        <span class="node" aria-hidden="true"><img src="assets/sj-monogram.png" alt="" width="14" height="21" /></span>
+      <!-- 1. Meet the founder -->
+      <li class="stop reveal">
+        <span class="node" aria-hidden="true">1</span>
         <article class="paper tilt-l">
           <span class="tag">Meet the founder</span>
           <div class="intro-grid">
@@ -1403,20 +1015,9 @@
             </figure>
             <div>
               <h3 class="ribbon">Saurabh Patkar</h3>
-              <p class="ribbon-sub">Founder &amp; Developer · SJ Digital</p>
-              <p>Hello, I'm Saurabh Patkar, founder and developer of SJ Digital, and a <strong>third-generation jeweller from Goa</strong>.</p>
+              <p>A <strong>third-generation jeweller from Goa</strong>. Before the counter, I was an engineer with an MBA in the corporate world.</p>
             </div>
           </div>
-        </article>
-      </li>
-
-      <!-- Chapter 1 -->
-      <li class="stop reveal">
-        <span class="node" aria-hidden="true">1</span>
-        <article class="paper tilt-r">
-          <span class="tag">Chapter 1 · The engineer</span>
-          <h3>My journey didn't begin at the counter</h3>
-          <p>I became an electronics and telecommunication engineer, earned an MBA in marketing, and spent three years in the corporate world.</p>
           <div class="chips">
             <span class="chip-paper"><svg class="i" aria-hidden="true"><use href="#i-tool"/></svg>E&amp;TC Engineer</span>
             <span class="chip-paper"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg>MBA · Marketing</span>
@@ -1425,90 +1026,61 @@
         </article>
       </li>
 
-      <!-- Chapter 2 -->
+      <!-- 2. Back home -->
       <li class="stop reveal">
         <span class="node" aria-hidden="true">2</span>
-        <article class="paper tilt-l">
-          <span class="tag">Chapter 2 · Back home</span>
-          <h3>Still, gold runs in the family</h3>
-          <div class="gens" aria-label="Three generations of jewellers">
-            <span class="coin">1st<small>gen</small></span><i></i>
-            <span class="coin">2nd<small>gen</small></span><i></i>
-            <span class="coin">3rd<small>gen</small></span>
-          </div>
-          <p>So I came home, to work beside my father in our jewellery shop, <strong>Saurabh Jewellers</strong>, serving Goa since 1999.</p>
-          <figure class="polaroid">
-            <span class="tape" aria-hidden="true"></span>
-            <img src="assets/saurabh-with-dad.jpg" alt="Saurabh Patkar with his father at the counter of Saurabh Jewellers, Goa" width="900" height="1200" loading="lazy" />
-            <figcaption>With my father, at our counter</figcaption>
-          </figure>
-        </article>
-      </li>
-
-      <!-- Chapter 3 -->
-      <li class="stop reveal">
-        <span class="node" aria-hidden="true">3</span>
         <article class="paper tilt-r">
-          <span class="tag">Chapter 3 · The problem</span>
-          <h3>Every gram, calculated by hand</h3>
-          <p>For five years I saw the trade up close, between jeweller and karigar. Every gram was calculated by hand, in old ledger books. And sometimes, one small mistake cost money.</p>
-          <div class="ledger" aria-label="Example of a handwritten karigar ledger with a calculation mistake">
-            <b>Karigar khata · 2019</b>
-            <div class="row"><span>Gold issued</span><span>50.000 g</span></div>
-            <div class="row"><span>Purity 91.6%</span><span>45.800 g</span></div>
-            <div class="row"><span>Wastage 8%</span><span>3.664 g</span></div>
-            <div class="row due"><span>Fine due</span><span class="wrong">49.646 g</span></div>
-            <span class="mistake">Mistake!</span>
-            <span class="loss">− ₹2,400</span>
+          <span class="tag">Back home</span>
+          <div class="home-grid">
+            <div>
+              <h3>Gold runs in the family</h3>
+              <div class="gens" aria-label="Three generations of jewellers">
+                <span class="coin">1st<small>gen</small></span><i></i>
+                <span class="coin">2nd<small>gen</small></span><i></i>
+                <span class="coin">3rd<small>gen</small></span>
+              </div>
+              <p>So I came home, to work beside my father at <strong>Saurabh Jewellers</strong>, serving Goa since 1999.</p>
+            </div>
+            <figure class="polaroid">
+              <span class="tape" aria-hidden="true"></span>
+              <img src="assets/saurabh-with-dad.jpg" alt="Saurabh Patkar with his father at the counter of Saurabh Jewellers, Goa" width="900" height="1200" loading="lazy" />
+              <figcaption>With my father</figcaption>
+            </figure>
           </div>
         </article>
       </li>
 
-      <!-- Chapter 4 -->
+      <!-- 3. Problem to solution -->
       <li class="stop reveal">
-        <span class="node" aria-hidden="true">4</span>
-        <article class="paper paper-dark tilt-l">
-          <span class="tag">Chapter 4 · The idea</span>
-          <h3>So the engineer in me got to work</h3>
-          <p>With my HTML and Java skills, I built a solution, one calculation at a time.</p>
-          <div class="code" aria-hidden="true">
-            <div class="code-tabs"><span>HTML</span><span>Java</span></div>
-<pre><span class="c">// SJ Digital</span>
-double fine = weight * purity / 100;
-double wastage = fine * 0.08;
-double labour = weight * rate;
-return fine + wastage;</pre>
-          </div>
-        </article>
-      </li>
-
-      <!-- Chapter 5 -->
-      <li class="stop reveal">
-        <span class="node" aria-hidden="true">5</span>
-        <article class="paper paper-maroon tilt-r">
-          <span class="tag">Chapter 5 · The solution</span>
-          <h3><img src="assets/sj-monogram.png" alt="" width="20" height="30" /> SJ Digital</h3>
-          <p>One app that solves the calculations of both the jeweller and the karigar.</p>
-          <div class="stamps">
-            <span class="stamp">Fast</span>
-            <span class="stamp">Accurate</span>
-            <span class="stamp">Transparent</span>
-          </div>
-        </article>
-      </li>
-
-      <!-- Vision -->
-      <li class="stop stop-end reveal">
         <span class="node node-gold" aria-hidden="true"><svg class="i"><use href="#i-spark"/></svg></span>
-        <article class="paper tilt-l">
-          <span class="tag">The vision</span>
-          <h3>Three generations of gold. Built for the next generation of jewellers.</h3>
+        <article class="paper paper-maroon tilt-l">
+          <span class="tag">The problem &amp; the solution</span>
+          <div class="home-grid">
+            <div>
+              <h3>Every gram, by hand</h3>
+              <p>For five years I watched every gram being calculated by hand in ledger books, where one small mistake could cost money. So I built <strong>SJ Digital</strong>: one app for both the jeweller and the karigar.</p>
+              <div class="stamps">
+                <span class="stamp">Fast</span>
+                <span class="stamp">Accurate</span>
+                <span class="stamp">Transparent</span>
+              </div>
+            </div>
+            <div class="ledger" aria-label="Example of a handwritten karigar ledger with a calculation mistake">
+              <b>Karigar khata · 2019</b>
+              <div class="row"><span>Gold issued</span><span>50.000 g</span></div>
+              <div class="row"><span>Purity 91.6%</span><span>45.800 g</span></div>
+              <div class="row"><span>Wastage 8%</span><span>3.664 g</span></div>
+              <div class="row due"><span>Fine due</span><span class="wrong">49.646 g</span></div>
+              <span class="mistake">Mistake!</span>
+              <span class="loss">− ₹2,400</span>
+            </div>
+          </div>
           <div class="sign-row">
             <div class="signature">
               <img src="assets/founder-saurabh.jpg" alt="" width="52" height="52" loading="lazy" />
-              <div><b>Saurabh Patkar</b><span>Founder &amp; Developer, SJ Digital</span></div>
+              <div><b>Saurabh Patkar</b><span>Founder &amp; Developer</span></div>
             </div>
-            <a class="btn btn-maroon" href="https://www.instagram.com/reel/DeuWU81h-Z7/" target="_blank" rel="noopener">
+            <a class="btn btn-gold" href="https://www.instagram.com/reel/DeuWU81h-Z7/" target="_blank" rel="noopener">
               <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Watch the founder story
             </a>
           </div>
@@ -1528,6 +1100,7 @@ return fine + wastage;</pre>
       <h2 id="pricing-title">One price. Yours for life.</h2>
       <p>No monthly fees, no renewals. Pay once and use every calculator forever.</p>
     </div>
+    <div class="price-wrap">
     <div class="price-card reveal">
       <div class="price-inner">
         <div class="price-top">
@@ -1548,54 +1121,19 @@ return fine + wastage;</pre>
         <p class="price-foot">Android app · Install in a minute</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     6. DOWNLOAD
-============================================================ -->
-<section class="download" id="download" aria-labelledby="download-title">
-  <div class="wrap">
-    <div class="dl-band reveal">
-      <div style="position:relative; z-index:1">
-        <span class="kicker">Download</span>
-        <h2 id="download-title" style="margin-top:14px">Get SJ Digital on your phone</h2>
-        <p>Lifetime access for ₹300. Start using it at your counter today.</p>
-        <div class="dl-actions">
-          <a class="gp-badge gp-lg" href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener"><img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" /></a>
-        </div>
-        <div class="dl-meta">
-          <a href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener">View on the Play Store</a>
-          <span>App Store: coming soon</span>
-        </div>
-      </div>
-      <figure class="dl-qr">
+    <aside class="get-app reveal" id="download" aria-label="Download SJ Digital">
+      <figure class="get-qr">
         <img src="assets/qr-download.png" alt="QR code that opens the SJ Digital download page" width="168" height="168" loading="lazy" />
         <figcaption>Scan to download</figcaption>
       </figure>
-    </div>
-
-    <div class="support">
-      <a href="https://www.instagram.com/sjdigitalindia/" target="_blank" rel="noopener">
-        <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.2.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></span>
-        <span><b>Instagram</b><small>@sjdigitalindia</small></span>
-      </a>
-      <a href="https://www.youtube.com/channel/UCqa9RBY2n3VKi9FDEdBWlUg" target="_blank" rel="noopener">
-        <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></span>
-        <span><b>YouTube</b><small>Tutorials &amp; tips</small></span>
-      </a>
-      <a href="mailto:sjprocalculator@gmail.com">
-        <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></span>
-        <span><b>Contact us</b><small>sjprocalculator@gmail.com</small></span>
-      </a>
-            <a href="privacy.html">
-        <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
-        <span><b>Privacy Policy</b><small>How we handle data</small></span>
-      </a>
-            <a href="terms.html">
-        <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg></span>
-        <span><b>Terms</b><small>Terms &amp; conditions</small></span>
-      </a>
+      <h3>Get it on your phone</h3>
+      <p>Install in a minute and start using it at your counter today.</p>
+      <ul class="get-meta">
+        <li><a href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener">View on the Play Store</a></li>
+        <li>App Store: coming soon</li>
+        <li><a href="mailto:sjprocalculator@gmail.com">Questions? sjprocalculator@gmail.com</a></li>
+      </ul>
+    </aside>
     </div>
   </div>
 </section>
@@ -1620,8 +1158,7 @@ return fine + wastage;</pre>
         <h4>Product</h4>
         <ul>
           <li><a href="#features">Features</a></li>
-          <li><a href="#calculators">Calculators</a></li>
-          <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#pricing">Pricing</a></li>
           <li><a href="https://play.google.com/store/apps/details?id=co.median.android.bnlqjyd" target="_blank" rel="noopener">Download</a></li>
         </ul>
       </div>
@@ -1683,24 +1220,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var nav = document.getElementById('nav');
   function onScroll() { if (nav) nav.classList.toggle('scrolled', window.scrollY > 10); }
   onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
-
-  /* Calculator detail tabs */
-  var tabBtns = document.querySelectorAll('.inner-tab-btn');
-  var wrap = document.getElementById('innerTabNav');
-  if (wrap) wrap.setAttribute('role', 'tablist');
-  tabBtns.forEach(function (btn) {
-    btn.setAttribute('role', 'tab');
-    btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
-    btn.setAttribute('aria-controls', btn.getAttribute('data-panel'));
-    btn.addEventListener('click', function () {
-      var panelId = btn.getAttribute('data-panel');
-      document.querySelectorAll('.inner-tab-panel').forEach(function (el) { el.classList.remove('active'); });
-      tabBtns.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-      var target = document.getElementById(panelId);
-      if (target) target.classList.add('active');
-      btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
-    });
-  });
 
   /* Features showcase: tabs + auto-advance */
   (function () {
